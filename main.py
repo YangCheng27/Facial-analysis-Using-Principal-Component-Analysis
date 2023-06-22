@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import eigh
+from mpl_toolkits.mplot3d import Axes3D
 
 def load_npy_dataset(filename):
     images = np.load(filename)
@@ -57,6 +58,26 @@ def display_ten_images(dataset):
 
     plt.show()
 
+def visual3D(projDataset):
+    x_proj_values = []
+    y_proj_values = []
+    z_proj_values = []
+
+    x_proj_values.append(projDataset[0])
+    y_proj_values.append(projDataset[1])
+    z_proj_values.append(projDataset[2])
+
+    fig = plt.figure(dpi = 120)
+    ax = fig.add_subplot(111, projection='3d')
+
+    ax.scatter(x_proj_values, y_proj_values, z_proj_values)
+    ax.set_xlabel('First Principal Component', fontweight="bold", fontsize=8)
+    ax.set_ylabel('Second Principal Component', fontweight="bold", fontsize=8)
+    ax.set_zlabel('Third Principal Component', fontweight="bold", fontsize=8)
+    plt.show()
+
+
+
 if __name__ == "__main__":
 
     # 1. get image dataset and information
@@ -74,23 +95,18 @@ if __name__ == "__main__":
     # 6. display one image with specific index
     display_images(centImages, projImages, 16)
 
-    # 7. display ten orig images and ten proj images with largest 2 eigenvalues
+    # 7. display ten orig images and ten proj images with largest 1 eigenvalue
     display_ten_images(centImages)
     display_ten_images(projImages)
 
-    # get the same the images with different number of largest eigenvalues
-    Lambda, U = get_eigenset(covarianceMatrix, 6)
+    # 7-2. get the same example images with different number of largest eigenvalues (from 3 to )
+    Lambda, U = get_eigenset(covarianceMatrix, 3)
     projImages = get_project_dataset(centImages, U)
     display_ten_images(projImages)
+    # 8. visualize the largest 3 projection dataset
+    visual3D(projImages)
 
     Lambda, U = get_eigenset(covarianceMatrix, 10)
     projImages = get_project_dataset(centImages, U)
     display_ten_images(projImages)
-
-    Lambda, U = get_eigenset(covarianceMatrix, 14)
-    projImages = get_project_dataset(centImages, U)
-    display_ten_images(projImages)
-
-    Lambda, U = get_eigenset(covarianceMatrix, 18)
-    projImages = get_project_dataset(centImages, U)
-    display_ten_images(projImages)
+    
