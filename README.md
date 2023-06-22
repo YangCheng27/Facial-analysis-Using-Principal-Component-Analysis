@@ -1,4 +1,4 @@
-# Facial-analysis-using-Principal-Component-Analysis
+# Facial-Analysis-using-Principal-Component-Analysis
 For this project, I worked with a portion of the Yale face dataset, which is saved in the 'YaleB_32x32.npy' file and contains 2,414 sample images, each of size 32x32. I utilized seven Python functions to perform PCA on this image dataset.
 
 ## Open Source Dataset : [The Yale Face Database](http://cvc.cs.yale.edu/cvc/projects/yalefaces/yalefaces.html)
