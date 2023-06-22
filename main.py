@@ -80,32 +80,25 @@ def visual3D(projDataset):
 
 if __name__ == "__main__":
 
-    # 1. get image dataset and information
     images, information = load_npy_dataset("YaleB_32x32.npy")
     print(information)
-    # 2. center the image dataset
     centImages = get_cent_dataset(images)
-    # 3. get covariance matrix
     covarianceMatrix = get_covariance_matrix(centImages)
-    # 4. get eigenset with largest 1 eigenvalues
+
+    # 1 largest eigenvalue
     Lambda, U = get_eigenset(covarianceMatrix, 1)
-    # 5. get projImages
     projImages = get_project_dataset(centImages, U)
-
-    # 6. display one image with specific index
     display_images(centImages, projImages, 16)
-
-    # 7. display ten orig images and ten proj images with largest 1 eigenvalue
     display_ten_images(centImages)
     display_ten_images(projImages)
 
-    # 7-2. get the same example images with different number of largest eigenvalues (from 3 to )
+    # 3 largest eigenvalues
     Lambda, U = get_eigenset(covarianceMatrix, 3)
     projImages = get_project_dataset(centImages, U)
     display_ten_images(projImages)
-    # 8. visualize the largest 3 projection dataset
     visual3D(projImages)
 
+    # 10 largest eigenvalues
     Lambda, U = get_eigenset(covarianceMatrix, 10)
     projImages = get_project_dataset(centImages, U)
     display_ten_images(projImages)
